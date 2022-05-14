@@ -1,6 +1,12 @@
 <template>
+  <span
+    class="geodata-error"
+    v-if="!isAppReady && !isGeoEnabled"
+  >
+    Please grant this site access to your geodata
+  </span>
   <transition>
-    <div class="main container" v-show="isAppReady">
+    <div class="main container" v-if="isAppReady && isGeoEnabled">
       <h2 class="main__title">
         World Weather
       </h2>
@@ -64,6 +70,7 @@ export default {
     const isAppReady = ref(false)
     const isLoading = ref(false)
     const isModalLoading = ref(false)
+    const isGeoEnabled = ref(false)
 
     // This is a function that is called when the user clicks the add button on the modal. It will get the weather data
     // for the city that the user entered and then add it to the cities array.
@@ -128,26 +135,35 @@ export default {
       localStorage.setItem('cities', JSON.stringify(filteredCities))
     }
 
-    // Getting the current location of the user and then using that to get the weather data for that location.
-    navigator.geolocation.getCurrentPosition(async (data) => {
-      try {
-        const weather = await getWeatherData([data.coords.latitude, data.coords.longitude])
-        const cityStorage = JSON.parse(localStorage.getItem('currentCity'))
-        const formatData = { ...weather }
+    // Checking if the user has granted permission to use their location. If they have, it will get the weather data for
+    // their current location and set it to the currentCity variable.
+    navigator.permissions.query({ name: 'geolocation' }).then((data) => {
+      isGeoEnabled.value = data.state === 'granted'
 
-        formatData.time = moment().format()
+      if (isGeoEnabled.value) {
+        navigator.geolocation.getCurrentPosition(async (data) => {
+          try {
+            const weather = await getWeatherData([data.coords.latitude, data.coords.longitude])
+            const cityStorage = JSON.parse(localStorage.getItem('currentCity'))
+            const formatData = { ...weather }
 
-        if (cityStorage && cityStorage.id === formatData.id) {
-          currentCity.value = cityStorage
-        } else {
-          currentCity.value = formatData
-          localStorage.setItem('currentCity', JSON.stringify(formatData))
-        }
+            formatData.time = moment().format()
 
-        isAppReady.value = true
-      } catch (e) {
-        throw new Error(e)
+            if (cityStorage && cityStorage.id === formatData.id) {
+              currentCity.value = cityStorage
+            } else {
+              currentCity.value = formatData
+              localStorage.setItem('currentCity', JSON.stringify(formatData))
+            }
+
+            isAppReady.value = true
+          } catch (e) {
+            throw new Error(e)
+          }
+        })
       }
+    }).catch((e) => {
+      throw new Error(e)
     })
 
     // Checking if there is a localStorage item called cities. If there is, it will set the cities array to the value of
@@ -157,6 +173,7 @@ export default {
     }
 
     return {
+      isGeoEnabled,
       currentCity,
       isModalOpened,
       cities,
