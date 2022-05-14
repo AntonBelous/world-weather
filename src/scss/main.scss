@@ -1,1 +1,185 @@
+@import "scss-reset/reset";
 @import "fonts";
+@import "grid";
+@import "animation";
+
+body {
+  font-family: $lato;
+  font-size: 18px;
+  line-height: 24px;
+  color: $body;
+
+  @include xl {
+    font-size: 16px;
+    line-height: 24px;
+  }
+
+  @include lg {
+    font-size: 14px;
+    line-height: 22px;
+  }
+
+  @include sm {
+    font-size: 12px;
+    line-height: 20px;
+  }
+}
+
+#app {
+  display: flex;
+  position: relative;
+  justify-content: center;
+  min-height: 100vh;
+  padding-top: 24px;
+}
+
+.main {
+  &__title {
+    font-size: 70px;
+    line-height: 80px;
+    font-weight: 300;
+    margin-bottom: 32px;
+    text-align: center;
+
+    @include xl {
+      font-size: 50px;
+      line-height: 55px;
+      margin-bottom: 20px;
+    }
+
+    @include lg {
+      font-size: 36px;
+      line-height: 44px;
+    }
+
+    @include md {
+      font-size: 28px;
+      line-height: 36px;
+    }
+  }
+
+  &__subtitle {
+    font-size: 24px;
+    line-height: 24px;
+    margin-bottom: 20px;
+    text-align: center;
+
+    @include xl {
+      font-size: 20px;
+      line-height: 22px;
+      margin-bottom: 15px;
+    }
+
+    @include md {
+      font-size: 18px;
+      line-height: 20px;
+    }
+  }
+
+  &__head-row {
+    display: flex;
+    position: relative;
+    justify-content: center;
+    padding-bottom: 46px;
+
+    @include xl {
+      padding-bottom: 30px;
+    }
+
+    @include lg {
+      padding-bottom: 25px;
+    }
+
+    @include sm {
+      padding-bottom: 16px;
+      margin-bottom: 14px;
+
+      &::after {
+        content: '';
+        display: block;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 1px;
+        background-color: $grey;
+      }
+    }
+  }
+
+  &__body-row {
+    display: flex;
+    position: relative;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin: 0 -20px;
+
+    @include xl {
+      margin: 0 -10px;
+    }
+  }
+
+  &__body-col {
+    flex-grow: 1;
+    max-width: 25%;
+    min-width: 25%;
+    padding: 0 20px 34px;
+    transition: .3s;
+
+    @include xl {
+      max-width: 33.333%;
+      min-width: 33.333%;
+      padding: 0 10px 20px;
+    }
+
+    @include lg {
+      max-width: 50%;
+      min-width: 50%;
+    }
+
+    @include sm {
+      max-width: 100%;
+      min-width: 100%;
+    }
+  }
+
+  &__trigger {
+    display: flex;
+    position: fixed;
+    align-items: center;
+    justify-content: center;
+    width: 56px;
+    height: 56px;
+    right: 45px;
+    bottom: 34px;
+    background-color: $purple;
+    overflow: hidden;
+    border-radius: 50%;
+    box-shadow: 0 4px 5px rgba(0, 0, 0, .14), 0 1px 10px rgba(0, 0, 0, .12), 0 2px 4px rgba(0, 0, 0, .2);
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAcCAYAAAByDd+UAAAACXBIWXMAABYlAAAWJQFJUiTwAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAABCSURBVHgB7dWxDQAgCETRO0dx/5lcBVujFYlQ/d9RvYIErGQRsc7Z9lSioeYAAQEB6/N9G6tjh9+zkvEPAQEBAZ82mF0MEb/Woe8AAAAASUVORK5CYII=');
+    background-position: 50% 50%;
+    background-size: 14px 14px;
+    background-repeat: no-repeat;
+    transition: transform .4s;
+
+    @include lg {
+      width: 35px;
+      height: 35px;
+      right: 25px;
+      bottom: 25px;
+      background-size: 12px 12px;
+    }
+
+    @include sm {
+      width: 25px;
+      height: 25px;
+      right: 15px;
+      bottom: 15px;
+      background-size: 10px 10px;
+    }
+
+    &--hidden {
+      transform: scale(0);
+    }
+  }
+}

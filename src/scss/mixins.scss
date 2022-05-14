@@ -1,0 +1,57 @@
+@mixin xs {
+  @media (max-width: 480px) { @content; }
+}
+
+@mixin sm {
+  @media (max-width: 600px) { @content; }
+}
+
+@mixin md {
+  @media (max-width: 900px) { @content; }
+}
+
+@mixin lg {
+  @media (max-width: 1200px) { @content; }
+}
+
+@mixin xl {
+  @media (max-width: 1550px) { @content; }
+}
+
+@mixin preloader {
+  position: relative;
+  z-index: 0;
+
+  &::before {
+    content: '';
+    display: block;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #fff;
+    z-index: 10;
+  }
+
+  &::after {
+    content: '';
+    display: block;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    margin: -25px 0 0 -25px;
+    border: 4px solid transparent;
+    border-top: 4px solid $body;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    animation: spin .75s linear infinite;
+    z-index: 11;
+  }
+
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+}
