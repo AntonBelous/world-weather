@@ -18,7 +18,7 @@
       </template>
 
       <h4 class="main__subtitle" v-else>
-        Please grant this site access to your geolocation
+        Please give this site access to your geolocation to see the weather in your city
       </h4>
 
       <transition>
@@ -103,7 +103,7 @@ export default {
 
         formatData.time = moment().format()
 
-        if (cityStorage.id !== formatData.id) {
+        if (cityStorage?.id !== formatData?.id) {
           const result = []
 
           JSON.parse(localStorage.getItem('cities')).forEach((el, i) => {
@@ -137,6 +137,22 @@ export default {
       localStorage.setItem('cities', JSON.stringify(filteredCities))
     }
 
+    // Filtering the cities array and removing the current city from it.
+    const setDefaultCitiesStorage = () => {
+      const cityStorage = JSON.parse(localStorage.getItem('currentCity'))
+      const citiesStorage = JSON.parse(localStorage.getItem('cities'))
+      const filteredCities = citiesStorage?.filter((el) => currentCity.value.id !== el.id)
+
+      if (!isGeoEnabled.value && cityStorage) localStorage.removeItem('currentCity')
+
+      if (filteredCities?.length) {
+        localStorage.setItem('cities', JSON.stringify(filteredCities))
+        cities.value = filteredCities
+      } else {
+        localStorage.removeItem('cities')
+      }
+    }
+
     // This is a function that is called when the user clicks the add button on the modal. It will get the weather data
     // for the city that the user entered and then add it to the cities array.
     navigator.geolocation.getCurrentPosition(
@@ -157,21 +173,19 @@ export default {
 
           isGeoEnabled.value = true
           isAppReady.value = true
+
+          setDefaultCitiesStorage()
         } catch (e) {
           throw new Error(e)
         }
       },
       (e) => {
         if (e.PERMISSION_DENIED) isGeoEnabled.value = false
+        setDefaultCitiesStorage()
+
         isAppReady.value = true
       }
     )
-
-    // Checking if there is a localStorage item called cities. If there is, it will set the cities array to the value of
-    // the localStorage item.
-    if (localStorage.getItem('cities')) {
-      cities.value = JSON.parse(localStorage.getItem('cities'))
-    }
 
     return {
       isGeoEnabled,

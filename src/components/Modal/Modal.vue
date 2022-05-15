@@ -138,8 +138,8 @@ export default {
 
       if (search.value && search.value !== lastSearch.value) {
         const currentCity = JSON.parse(localStorage.getItem('currentCity'))
-        const currentName = currentCity.name.toLowerCase()
-        const currentCountry = currentCity.sys.country.toLowerCase()
+        const currentName = currentCity?.name.toLowerCase()
+        const currentCountry = currentCity?.sys?.country.toLowerCase()
 
         isCityAlreadyAdded.value = false
 
@@ -147,7 +147,7 @@ export default {
           const elName = el.name.toLowerCase()
           const elCountry = el.country.toLowerCase()
           const isNameEqual = elName.includes(search.value.toLowerCase())
-          const isCurrent = elName === currentName && elCountry === currentCountry
+          const isCurrent = currentName && currentCountry && elName === currentName && elCountry === currentCountry
 
           return isNameEqual && !isCurrent
         })
