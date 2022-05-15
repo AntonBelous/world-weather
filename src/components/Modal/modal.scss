@@ -147,7 +147,7 @@
   &__search-results {
     position: absolute;
     overflow-y: auto;
-    max-height: 104px;
+    max-height: 115px;
     top: 70px;
     border: 1px solid $body;
     width: 100%;
@@ -157,19 +157,24 @@
     }
 
     &::-webkit-scrollbar-track {
-      background: $body;
+      background: #fff;
+      border-left: 1px solid $body;
     }
 
     &::-webkit-scrollbar-thumb {
-      background: #fff;
-    }
+      background: $body;
 
-    &::-webkit-scrollbar-thumb:hover {
-      background: #fff;
+      &:hover {
+        background: $body;
+      }
     }
 
     @include xl {
-      max-height: 100px;
+      max-height: 104px;
+    }
+
+    @include lg {
+      max-height: 98px;
     }
   }
 
