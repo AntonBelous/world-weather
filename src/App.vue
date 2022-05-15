@@ -1,6 +1,6 @@
 <template>
   <span
-      class="geolocation-error"
+      class="geolocation-alert"
       v-if="!isAppReady && !isGeoEnabled"
   >
     Please grant this site access to your geolocation
