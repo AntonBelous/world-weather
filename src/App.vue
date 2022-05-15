@@ -61,6 +61,7 @@
 <script>
 import { ref } from 'vue'
 import getWeatherData from './helpers/getWeatherData'
+import storage from '@/helpers/storageEmitter'
 import moment from 'moment'
 
 export default {
@@ -83,7 +84,7 @@ export default {
         const weather = await getWeatherData($event.name, $event.country)
         weather.time = moment().format()
         cities.value.push(weather)
-        localStorage.setItem('cities', JSON.stringify(cities.value))
+        storage.set('cities', cities.value)
         isModalOpened.value = false
         isModalLoading.value = false
       } catch (e) {
@@ -98,7 +99,7 @@ export default {
 
       try {
         const weather = await getWeatherData($event.city, $event.country)
-        const cityStorage = JSON.parse(localStorage.getItem('currentCity'))
+        const cityStorage = storage.get('currentCity')
         const formatData = { ...weather }
 
         formatData.time = moment().format()
@@ -106,7 +107,7 @@ export default {
         if (cityStorage?.id !== formatData?.id) {
           const result = []
 
-          JSON.parse(localStorage.getItem('cities')).forEach((el, i) => {
+          storage.get('cities').forEach((el, i) => {
             if (el.id === formatData.id) {
               cities.value[i] = formatData
               result.push(formatData)
@@ -116,10 +117,10 @@ export default {
             result.push(el)
           })
 
-          localStorage.setItem('cities', JSON.stringify(result))
+          storage.set('cities', result)
         } else {
           currentCity.value = formatData
-          localStorage.setItem('currentCity', JSON.stringify(formatData))
+          storage.set('currentCity', formatData)
         }
 
         isLoading.value = false
@@ -131,25 +132,25 @@ export default {
     // This is a function that is called when the user clicks the remove button on a card. It will filter the cities array
     // and remove the city that the user clicked on.
     const removeItem = ($event) => {
-      const filteredCities = JSON.parse(localStorage.getItem('cities')).filter((el) => el.id !== $event)
+      const filteredCities = storage.get('cities').filter((el) => el.id !== $event)
 
       cities.value = filteredCities
-      localStorage.setItem('cities', JSON.stringify(filteredCities))
+      storage.set('cities', filteredCities)
     }
 
     // Filtering the cities array and removing the current city from it.
     const setDefaultCitiesStorage = () => {
-      const cityStorage = JSON.parse(localStorage.getItem('currentCity'))
-      const citiesStorage = JSON.parse(localStorage.getItem('cities'))
+      const cityStorage = storage.get('currentCity')
+      const citiesStorage = storage.get('cities')
       const filteredCities = citiesStorage?.filter((el) => currentCity.value.id !== el.id)
 
-      if (!isGeoEnabled.value && cityStorage) localStorage.removeItem('currentCity')
+      if (!isGeoEnabled.value && cityStorage) storage.remove('currentCity')
 
       if (filteredCities?.length) {
-        localStorage.setItem('cities', JSON.stringify(filteredCities))
+        storage.set('cities', filteredCities)
         cities.value = filteredCities
       } else {
-        localStorage.removeItem('cities')
+        storage.remove('cities')
       }
     }
 
@@ -159,7 +160,7 @@ export default {
       async (data) => {
         try {
           const weather = await getWeatherData([data.coords.latitude, data.coords.longitude])
-          const cityStorage = JSON.parse(localStorage.getItem('currentCity'))
+          const cityStorage = storage.get('currentCity')
           const formatData = { ...weather }
 
           formatData.time = moment().format()
@@ -168,7 +169,7 @@ export default {
             currentCity.value = cityStorage
           } else {
             currentCity.value = formatData
-            localStorage.setItem('currentCity', JSON.stringify(formatData))
+            storage.set('currentCity', formatData)
           }
 
           isGeoEnabled.value = true

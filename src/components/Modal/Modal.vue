@@ -69,6 +69,7 @@
 import cities from 'cities.json'
 import { ref, toRefs, watch } from 'vue'
 import { getName } from 'country-list'
+import storage from '@/helpers/storageEmitter'
 
 export default {
   name: 'ModalComponent',
@@ -137,7 +138,7 @@ export default {
       filteredResults.value = []
 
       if (search.value && search.value !== lastSearch.value) {
-        const currentCity = JSON.parse(localStorage.getItem('currentCity'))
+        const currentCity = storage.get('currentCity')
         const currentName = currentCity?.name.toLowerCase()
         const currentCountry = currentCity?.sys?.country.toLowerCase()
 
@@ -160,7 +161,7 @@ export default {
     // filters them and checks if the selected city is already added. If it is not added it emits the addItem event and
     // passes the selected city as a payload. If it is added it clears the search and sets the isCityAlreadyAdded to true.
     const addItem = () => {
-      const citiesStorage = JSON.parse(localStorage.getItem('cities'))
+      const citiesStorage = storage.get('cities')
       const selectedCities = !citiesStorage
         ? []
         : citiesStorage.filter((el) => {
