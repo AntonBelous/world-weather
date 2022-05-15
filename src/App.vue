@@ -1,9 +1,8 @@
 <template>
   <transition>
     <div class="main container" v-if="isAppReady">
-      <h2 class="main__title">
-        World Weather
-      </h2>
+      <h2 class="main__title">World Weather</h2>
+
       <template v-if="currentCity.id && isGeoEnabled">
         <h4 class="main__subtitle" >
           Watch weather in your current location
@@ -17,30 +16,36 @@
           />
         </div>
       </template>
+
       <h4 class="main__subtitle" v-else>
         Please grant this site access to your geolocation
       </h4>
-      <div class="main__body-row" v-if="cities.length">
-        <transition-group>
-          <div
-            class="main__body-col"
-            :key="index"
-            v-for="(item, index) in cities"
-          >
-            <card-component
-              :data="item"
-              :is-loading="isLoading"
-              @update-item="updateItem"
-              @remove-item="removeItem"
-            />
-          </div>
-        </transition-group>
-      </div>
+
+      <transition>
+        <div class="main__body-row" v-if="cities.length">
+          <transition-group>
+            <div
+              class="main__body-col"
+              :key="index"
+              v-for="(item, index) in cities"
+            >
+              <card-component
+                :data="item"
+                :is-loading="isLoading"
+                @update-item="updateItem"
+                @remove-item="removeItem"
+              />
+            </div>
+          </transition-group>
+        </div>
+      </transition>
+
       <button
         class="main__trigger"
         :class="{'main__trigger--hidden': isModalOpened}"
         @click="isModalOpened = true"
       ></button>
+
       <transition>
         <modal-component
           :is-opened="isModalOpened"

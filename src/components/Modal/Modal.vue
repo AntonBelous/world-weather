@@ -6,12 +6,15 @@
   >
     <div class="modal__container">
       <div class="modal__card">
+
         <h3 class="modal__title">
           Choose a city
         </h3>
+
         <h4 class="modal__subtitle">
           To find city start typing and pick one from the suggestions
         </h4>
+
         <div
           class="modal__search"
           :class="{'modal__search--has-error': isCityAlreadyAdded}"
@@ -23,9 +26,7 @@
             placeholder="Search city"
             v-model="search"
           >
-          <span
-            class="modal__search-error"
-          >
+          <span class="modal__search-error">
             Choose another city. This city has already been added.
           </span>
           <div
@@ -41,6 +42,7 @@
             >{{ result.name }} ({{ getName(result.country) }})</button>
           </div>
         </div>
+
         <div class="modal__foot-row">
           <div class="modal__foot-col">
             <button class="modal__btn" @click="clearSearch">Clear</button>
@@ -57,6 +59,7 @@
             >Add</button>
           </div>
         </div>
+
       </div>
     </div>
   </div>

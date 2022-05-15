@@ -3,12 +3,14 @@
     class="card"
     :class="{'card--loading': isLoading}"
   >
+
     <div class="card__head-row">
       <h3 class="card__title" v-if="data.name">{{ data.name }}</h3>
       <div class="card__subtitle" v-if="data.sys.country">
         {{ getName(data.sys.country) }}
       </div>
     </div>
+
     <div class="card__body-row">
       <div class="card__list">
         <div class="card__list-block" v-if="data.weather[0].main">
@@ -40,6 +42,7 @@
         {{ timeString }}
       </div>
     </div>
+
     <div class="card__foot-row">
       <button
         class="card__btn"
@@ -51,6 +54,7 @@
         @click="$emit('updateItem', {city: data.name, country: data.sys.country})"
       >Reload</button>
     </div>
+
   </div>
 </template>
 
