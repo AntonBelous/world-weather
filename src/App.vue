@@ -4,7 +4,7 @@
       <h2 class="main__title">
         World Weather
       </h2>
-      <template v-if="currentCity.name">
+      <template v-if="currentCity.id">
         <h4 class="main__subtitle" >
           Watch weather in your current location
         </h4>
@@ -17,7 +17,7 @@
           />
         </div>
       </template>
-      <div class="main__body-row" v-if="currentCity">
+      <div class="main__body-row" v-if="cities.length">
         <transition-group>
           <div
             class="main__body-col"
