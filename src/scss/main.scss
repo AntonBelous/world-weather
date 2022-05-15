@@ -30,11 +30,6 @@ body {
     font-size: 14px;
     line-height: 22px;
   }
-
-  @include sm {
-    font-size: 12px;
-    line-height: 20px;
-  }
 }
 
 #app {
@@ -42,7 +37,6 @@ body {
   position: relative;
   justify-content: center;
   min-height: 100vh;
-  padding-top: 24px;
 }
 
 .main {
@@ -109,7 +103,7 @@ body {
     justify-content: center;
     flex-wrap: wrap;
     margin: 0 -20px;
-    padding-bottom: 65px;
+    padding-bottom: 5px;
 
     @include xl {
       margin: 0 -10px;

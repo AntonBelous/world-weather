@@ -168,12 +168,8 @@
       background: #fff;
     }
 
-    @include lg {
-      max-height: 96px;
-    }
-
-    @include sm {
-      max-height: 88px;
+    @include xl {
+      max-height: 100px;
     }
   }
 
