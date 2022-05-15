@@ -1,18 +1,8 @@
 <template>
-  <transition-group>
-    <div
-      class="background"
-      :class="{'background--ready': isAppReady}"
-      key="background"
-    >
-      <canvas class="background__canvas"></canvas>
-      <div class="background__inner"></div>
-    </div>
-
+  <transition>
     <div
       class="main"
       v-if="isAppReady"
-      key="main"
     >
       <h2 class="main__title">World Weather</h2>
 
@@ -68,15 +58,14 @@
         />
       </transition>
     </div>
-  </transition-group>
+  </transition>
 </template>
 
 <script>
-import { ref, onMounted } from 'vue'
+import { ref } from 'vue'
 import getWeatherData from './helpers/getWeatherData'
 import storage from '@/helpers/storageEmitter'
 import moment from 'moment'
-import backgroundAnimation from '@/helpers/backgroundAnimation'
 
 export default {
   name: 'App',
@@ -201,10 +190,6 @@ export default {
         isAppReady.value = true
       }
     )
-
-    onMounted(() => {
-      backgroundAnimation()
-    })
 
     return {
       isGeoEnabled,
