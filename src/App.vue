@@ -1,6 +1,12 @@
 <template>
+  <span
+      class="geolocation-error"
+      v-if="!isAppReady && !isGeoEnabled"
+  >
+    Please grant this site access to your geolocation
+  </span>
   <transition>
-    <div class="main container" v-if="isAppReady">
+    <div class="main container" v-if="isAppReady && isGeoEnabled">
       <h2 class="main__title">
         World Weather
       </h2>
@@ -64,6 +70,7 @@ export default {
     const isAppReady = ref(false)
     const isLoading = ref(false)
     const isModalLoading = ref(false)
+    const isGeoEnabled = ref(false)
 
     // This is a function that is called when the user clicks the add button on the modal. It will get the weather data
     // for the city that the user entered and then add it to the cities array.
@@ -128,9 +135,17 @@ export default {
       localStorage.setItem('cities', JSON.stringify(filteredCities))
     }
 
-    // This is a function that is called when the user grants the site access to their geodata. It will get the weather
-    // data for the user's current location and then set the currentCity object to the data that it gets back.
+    // This is a function that is called when the user grants the site access to their geolocation. It will get the
+    // weather data for the user's current location and then set the currentCity object to the data that it gets back.
     navigator.geolocation.getCurrentPosition(async (data) => {
+      try {
+        const isGeoPosition = await navigator.permissions.query({ name: 'geolocation' })
+        isGeoEnabled.value = isGeoPosition.state === 'granted'
+        if (!isGeoEnabled.value) return
+      } catch (e) {
+        throw new Error(e)
+      }
+
       try {
         const weather = await getWeatherData([data.coords.latitude, data.coords.longitude])
         const cityStorage = JSON.parse(localStorage.getItem('currentCity'))
@@ -158,6 +173,7 @@ export default {
     }
 
     return {
+      isGeoEnabled,
       currentCity,
       isModalOpened,
       cities,
