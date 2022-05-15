@@ -37,16 +37,6 @@ body {
   }
 }
 
-input,
-a {
-  &:active,
-  &:hover,
-  &:focus {
-    outline: none;
-    outline-offset: 0;
-  }
-}
-
 #app {
   display: flex;
   position: relative;
