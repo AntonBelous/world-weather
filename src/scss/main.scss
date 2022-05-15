@@ -1,7 +1,7 @@
 @import "scss-reset/reset";
 @import "fonts";
-@import "grid";
 @import "animation";
+@import "background";
 
 body {
   font-family: $lato;
@@ -30,6 +30,10 @@ body {
     font-size: 14px;
     line-height: 22px;
   }
+
+  * {
+    -webkit-tap-highlight-color: transparent;
+  }
 }
 
 #app {
@@ -40,6 +44,31 @@ body {
 }
 
 .main {
+  display: inline-flex;
+  flex-direction: column;
+  flex-grow: 1;
+  max-width: 1550px;
+  padding: 24px 15px 9px;
+  z-index: 1;
+
+  @include xl {
+    max-width: 1200px;
+  }
+
+  @include lg {
+    max-width: 900px;
+  }
+
+  @include md {
+    max-width: 600px;
+    padding-top: 10px;
+    padding-bottom: 60px;
+  }
+
+  @include sm {
+    max-width: 480px;
+  }
+
   &__title {
     font-size: 70px;
     line-height: 80px;
