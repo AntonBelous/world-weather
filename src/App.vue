@@ -25,7 +25,7 @@
       </h4>
 
       <transition>
-        <div class="main__body-row" v-if="cities.length">
+        <div class="main__body-row" ref="bodyRow" v-if="cities.length">
           <transition-group>
             <div
               class="main__body-col"
@@ -62,7 +62,7 @@
 </template>
 
 <script>
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
 import getWeatherData from './helpers/getWeatherData'
 import storage from '@/helpers/storageEmitter'
 import moment from 'moment'
@@ -77,6 +77,15 @@ export default {
     const isLoading = ref(false)
     const isModalLoading = ref(false)
     const isGeoEnabled = ref(false)
+    const bodyRow = ref(null)
+    const isNewItemAdded = ref(false)
+
+    const notFoundErrorHandler = (err) => {
+      if (err.message.includes('code 404')) {
+        alert('City not found in database')
+        isModalLoading.value = false
+      }
+    }
 
     // This is a function that is called when the user clicks the add button on the modal. It will get the weather data
     // for the city that the user entered and then add it to the cities array.
@@ -88,9 +97,11 @@ export default {
         weather.time = moment().format()
         cities.value.push(weather)
         storage.set('cities', cities.value)
+        isNewItemAdded.value = true
         isModalOpened.value = false
         isModalLoading.value = false
       } catch (e) {
+        notFoundErrorHandler(e)
         throw new Error(e)
       }
     }
@@ -128,6 +139,7 @@ export default {
 
         isLoading.value = false
       } catch (e) {
+        notFoundErrorHandler(e)
         throw new Error(e)
       }
     }
@@ -180,6 +192,7 @@ export default {
 
           setDefaultCitiesStorage()
         } catch (e) {
+          notFoundErrorHandler(e)
           throw new Error(e)
         }
       },
@@ -191,6 +204,16 @@ export default {
       }
     )
 
+    watch(isNewItemAdded, () => {
+      if (bodyRow.value) {
+        setTimeout(() => {
+          bodyRow.value.lastElementChild.scrollIntoView()
+        }, 400)
+      }
+
+      isNewItemAdded.value = false
+    })
+
     return {
       isGeoEnabled,
       currentCity,
@@ -199,6 +222,7 @@ export default {
       isLoading,
       isModalLoading,
       isAppReady,
+      bodyRow,
       addItem,
       updateItem,
       removeItem

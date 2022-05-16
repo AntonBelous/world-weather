@@ -173,9 +173,10 @@ export default {
       if (!selectedCities.length) {
         emit('addItem', selectedCity.value)
       } else {
-        clearSearch()
         isCityAlreadyAdded.value = true
       }
+
+      clearSearch()
     }
 
     return {

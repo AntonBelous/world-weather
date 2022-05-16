@@ -2,6 +2,10 @@
 @import "fonts";
 @import "animation";
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   font-family: $lato;
   font-size: 18px;
