@@ -1,50 +1,7 @@
 @import "scss-reset/reset";
 @import "fonts";
 @import "animation";
-
-html {
-  scroll-behavior: smooth;
-}
-
-body {
-  font-family: $lato;
-  font-size: 18px;
-  line-height: 24px;
-  color: $body;
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-  -webkit-touch-callout: none;
-  -webkit-user-select: none;
-  -khtml-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-
-  &::-webkit-scrollbar {
-    display: none;
-  }
-
-  @include xl {
-    font-size: 16px;
-    line-height: 24px;
-  }
-
-  @include lg {
-    font-size: 14px;
-    line-height: 22px;
-  }
-
-  * {
-    -webkit-tap-highlight-color: transparent;
-  }
-}
-
-#app {
-  display: flex;
-  position: relative;
-  justify-content: center;
-  min-height: 100vh;
-}
+@import "base";
 
 .main {
   display: inline-flex;
