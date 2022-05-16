@@ -204,14 +204,15 @@ export default {
       }
     )
 
+    // This is a watcher that is watching the isNewItemAdded variable. When the variable changes, it will scroll to the
+    // last element in the bodyRow.
     watch(isNewItemAdded, () => {
-      if (bodyRow.value) {
+      if (isNewItemAdded.value && bodyRow.value) {
         setTimeout(() => {
           bodyRow.value.lastElementChild.scrollIntoView()
-        }, 400)
+          isNewItemAdded.value = false
+        }, 300)
       }
-
-      isNewItemAdded.value = false
     })
 
     return {
