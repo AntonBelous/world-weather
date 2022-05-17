@@ -2,4 +2,177 @@
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
 
-@import "button";
+@import "variables";
+@import "mixins";
+@import "fonts";
+@import "animation";
+@import "base";
+
+.main {
+  display: inline-flex;
+  flex-direction: column;
+  flex-grow: 1;
+  max-width: 1550px;
+  padding: 24px 15px 9px;
+  z-index: 1;
+
+  @include xl {
+    max-width: 1200px;
+  }
+
+  @include lg {
+    max-width: 900px;
+  }
+
+  @include md {
+    max-width: 600px;
+    padding-top: 10px;
+    padding-bottom: 60px;
+  }
+
+  @include sm {
+    max-width: 480px;
+  }
+
+  &__title {
+    font-size: 70px;
+    line-height: 80px;
+    font-weight: 300;
+    margin-bottom: 32px;
+    text-align: center;
+
+    @include xl {
+      font-size: 50px;
+      line-height: 55px;
+      margin-bottom: 20px;
+    }
+
+    @include lg {
+      font-size: 36px;
+      line-height: 44px;
+    }
+
+    @include md {
+      font-size: 28px;
+      line-height: 36px;
+      margin-bottom: 10px;
+    }
+  }
+
+  &__subtitle {
+    font-size: 24px;
+    line-height: 24px;
+    margin-bottom: 20px;
+    text-align: center;
+
+    @include xl {
+      font-size: 20px;
+      line-height: 24px;
+      margin-bottom: 15px;
+    }
+
+    @include md {
+      font-size: 18px;
+      line-height: 22px;
+    }
+  }
+
+  &__head-row {
+    display: flex;
+    position: relative;
+    justify-content: center;
+    padding-bottom: 46px;
+
+    @include xl {
+      padding-bottom: 30px;
+    }
+
+    @include lg {
+      padding-bottom: 25px;
+    }
+  }
+
+  &__body-row {
+    display: flex;
+    position: relative;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin: 0 -20px;
+    padding-bottom: 5px;
+
+    @include xl {
+      margin: 0 -10px;
+    }
+
+    @include sm {
+      padding-top: 25px;
+
+      &::after {
+        content: '';
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 15px;
+        width: calc(100% - 30px);
+        height: 1px;
+        background-color: $grey;
+      }
+    }
+  }
+
+  &__body-col {
+    flex-grow: 1;
+    max-width: 25%;
+    min-width: 25%;
+    padding: 0 20px 34px;
+    transition: .3s;
+
+    @include xl {
+      max-width: 33.333%;
+      min-width: 33.333%;
+      padding: 0 10px 20px;
+    }
+
+    @include lg {
+      max-width: 50%;
+      min-width: 50%;
+    }
+
+    @include sm {
+      max-width: 100%;
+      min-width: 100%;
+    }
+  }
+
+  &__trigger {
+    display: flex;
+    position: fixed;
+    align-items: center;
+    justify-content: center;
+    width: 56px;
+    height: 56px;
+    right: 45px;
+    bottom: 34px;
+    background-color: $purple;
+    overflow: hidden;
+    border-radius: 50%;
+    box-shadow: 0 4px 5px rgba(0, 0, 0, .14), 0 1px 10px rgba(0, 0, 0, .12), 0 2px 4px rgba(0, 0, 0, .2);
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAcCAYAAAByDd+UAAAACXBIWXMAABYlAAAWJQFJUiTwAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAABCSURBVHgB7dWxDQAgCETRO0dx/5lcBVujFYlQ/d9RvYIErGQRsc7Z9lSioeYAAQEB6/N9G6tjh9+zkvEPAQEBAZ82mF0MEb/Woe8AAAAASUVORK5CYII=');
+    background-position: 50% 50%;
+    background-size: 14px 14px;
+    background-repeat: no-repeat;
+    transition: transform .4s;
+
+    @include lg {
+      width: 35px;
+      height: 35px;
+      right: 25px;
+      bottom: 25px;
+      background-size: 12px 12px;
+    }
+
+    &--hidden {
+      transform: scale(0);
+    }
+  }
+}
