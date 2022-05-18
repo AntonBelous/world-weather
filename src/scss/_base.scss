@@ -1,43 +1,27 @@
 html {
-  scroll-behavior: smooth;
+  @apply
+  scroll-smooth
 }
 
 body {
-  font-family: $lato;
-  font-size: 18px;
-  line-height: 24px;
-  color: $body;
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-  -webkit-touch-callout: none;
-  -webkit-user-select: none;
-  -khtml-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-
-  &::-webkit-scrollbar {
-    display: none;
-  }
-
-  @include xl {
-    font-size: 16px;
-    line-height: 24px;
-  }
-
-  @include lg {
-    font-size: 14px;
-    line-height: 22px;
-  }
-
-  * {
-    -webkit-tap-highlight-color: transparent;
-  }
+  @apply
+  font-lato
+  select-none
+  scrollbar-hide
+  text-body
+  text-md
+  xl:text-sm
+  lg:text-xs
 }
 
 #app {
-  display: flex;
-  position: relative;
-  justify-content: center;
-  min-height: 100vh;
+  @apply
+  flex
+  relative
+  min-h-screen
+  justify-center
+}
+
+* {
+  -webkit-tap-highlight-color: transparent;
 }

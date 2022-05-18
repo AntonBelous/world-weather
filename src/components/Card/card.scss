@@ -4,6 +4,7 @@
   flex-direction: column;
   justify-content: flex-start;
   flex-grow: 1;
+  margin: 0 auto;
   max-width: 824px;
   overflow: hidden;
   padding: 24px;
@@ -31,7 +32,7 @@
   }
 
   @include md {
-    max-width: none;
+    max-width: 400px;
   }
 
   &__head-row {
