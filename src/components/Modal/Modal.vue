@@ -1,8 +1,8 @@
 <template>
   <div
+    v-show="isOpened"
     class="modal"
     :class="{'modal--loading': isLoading}"
-    v-show="isOpened"
   >
     <div class="modal__container">
       <div class="modal__card">
@@ -20,25 +20,25 @@
           :class="{'modal__search--has-error': isCityAlreadyAdded}"
         >
           <input
+            v-model="search"
             type="text"
             name="search"
             class="modal__search-input"
             placeholder="Search city"
-            v-model="search"
           >
           <span class="modal__search-error">
             Choose another city. This city has already been added.
           </span>
           <div
-            class="modal__search-results"
             v-if="filteredResults.length && !selectedCity.value"
+            class="modal__search-results"
             @scroll="renderMoreResults"
           >
             <button
-              class="modal__search-item"
-              @click="updateSearch(result)"
               v-for="(result, index) in filteredResults"
               :key="index"
+              class="modal__search-item"
+              @click="updateSearch(result)"
             >{{ result.name }} ({{ getName(result.country) }})</button>
           </div>
         </div>
@@ -66,10 +66,10 @@
 </template>
 
 <script>
-import cities from '../../../../world-weather/node_modules/cities.json/cities'
+import cities from 'cities.json/cities.json'
 import { ref, toRefs, watch } from 'vue'
 import { getName } from 'country-list'
-import storage from '@/helpers/storageEmitter'
+import storage from '../../helpers/storageEmitter'
 
 export default {
   name: 'ModalComponent',
@@ -78,9 +78,6 @@ export default {
     isLoading: Boolean
   },
   emits: ['closeModal', 'addItem'],
-  methods: {
-    getName
-  },
   setup (props, { emit }) {
     const { isOpened } = toRefs(props)
     const search = ref('')
@@ -189,6 +186,9 @@ export default {
       renderMoreResults,
       addItem
     }
+  },
+  methods: {
+    getName
   }
 }
 </script>

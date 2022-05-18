@@ -5,15 +5,17 @@
   >
 
     <div class="card__head-row">
-      <h3 class="card__title" v-if="cardInfo.name">{{ cardInfo.name }}</h3>
-      <div class="card__subtitle" v-if="cardInfo.sys.country">
+      <h3 v-if="cardInfo.name" class="card__title">
+        {{ cardInfo.name }}
+      </h3>
+      <div v-if="cardInfo.sys.country" class="card__subtitle">
         {{ getName(cardInfo.sys.country) }}
       </div>
     </div>
 
     <div class="card__body-row">
       <div class="card__list">
-        <div class="card__list-block" v-if="cardInfo.weather[0].main">
+        <div v-if="cardInfo.weather[0].main" class="card__list-block">
           <div class="card__list-col">
             Weather
           </div>
@@ -21,7 +23,7 @@
             {{ cardInfo.weather[0].main }}
           </div>
         </div>
-        <div class="card__list-block" v-if="cardInfo.main.temp">
+        <div v-if="cardInfo.main.temp" class="card__list-block">
           <div class="card__list-col">
             Temperature
           </div>
@@ -29,7 +31,7 @@
             {{ tempString }} °C
           </div>
         </div>
-        <div class="card__list-block" v-if="cardInfo.main.humidity">
+        <div v-if="cardInfo.main.humidity" class="card__list-block">
           <div class="card__list-col">
             Humidity
           </div>
@@ -45,8 +47,8 @@
 
     <div class="card__foot-row">
       <button
-        class="card__btn"
         v-if="!hideRemoveButton"
+        class="card__btn"
         @click="$emit('removeItem', cardInfo.id)"
       >Remove</button>
       <button
