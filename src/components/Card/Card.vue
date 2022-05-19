@@ -63,7 +63,10 @@
 <script>
 import { ref, onMounted, computed, onBeforeUnmount } from 'vue'
 import { getName } from 'country-list'
-import moment from 'moment'
+import dayjs from 'dayjs'
+import relativeTime from 'dayjs/plugin/relativeTime'
+
+dayjs.extend(relativeTime)
 
 export default {
   name: 'CardComponent',
@@ -90,7 +93,7 @@ export default {
     })
 
     const updateTimeString = () => {
-      timeString.value = moment(props.cardInfo.time).fromNow()
+      timeString.value = dayjs(props.cardInfo.time).fromNow()
     }
 
     onMounted(() => {

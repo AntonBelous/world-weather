@@ -10,10 +10,6 @@ module.exports = {
       card: '0 2px 10px rgba(10, 10, 10, .25)',
     },
 
-    backgroundColor: theme => ({
-      ...theme('colors'),
-    }),
-
     fontSize: {
       xs: ['14px', '20px'],
       sm: ['16px', '22px'],
@@ -51,6 +47,10 @@ module.exports = {
         'modal-overlay': 'rgba(11, 11, 11, .5)',
         'modal-shadow': '#c1c1c1',
       },
+
+      backgroundColor: theme => ({
+        ...theme('colors'),
+      }),
     },
 
   },

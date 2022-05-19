@@ -65,9 +65,12 @@
 import { ref, watch } from 'vue'
 import getWeatherData from './helpers/getWeatherData'
 import storage from './helpers/storageEmitter'
-import moment from 'moment'
 import CardComponent from "./components/Card/Card.vue";
 import ModalComponent from "./components/Modal/Modal.vue";
+import dayjs from 'dayjs'
+import relativeTime from 'dayjs/plugin/relativeTime'
+
+dayjs.extend(relativeTime)
 
 export default {
   name: 'App',
@@ -97,7 +100,7 @@ export default {
 
       try {
         const weather = await getWeatherData($event.name, $event.country)
-        weather.time = moment().format()
+        weather.time = dayjs().format()
         cities.value.push(weather)
         storage.set('cities', cities.value)
         isNewItemAdded.value = true
@@ -122,7 +125,7 @@ export default {
         const cityStorage = storage.get('currentCity')
         const formatData = { ...weather }
 
-        formatData.time = moment().format()
+        formatData.time = dayjs().format()
 
         if (cityStorage?.id !== formatData?.id) {
           const result = []
@@ -184,7 +187,7 @@ export default {
           const cityStorage = storage.get('currentCity')
           const formatData = { ...weather }
 
-          formatData.time = moment().format()
+          formatData.time = dayjs().format()
 
           if (cityStorage && cityStorage.id === formatData.id) {
             currentCity.value = cityStorage
