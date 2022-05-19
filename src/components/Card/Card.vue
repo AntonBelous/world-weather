@@ -115,6 +115,6 @@ export default {
 }
 </script>
 
-<style lang="scss">
-@import "card";
+<style>
+@import "card.css";
 </style>

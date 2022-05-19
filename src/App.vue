@@ -102,7 +102,10 @@ export default {
         storage.set('cities', cities.value)
         isNewItemAdded.value = true
         isModalOpened.value = false
-        isModalLoading.value = false
+
+        setTimeout(() => {
+          isModalLoading.value = false
+        }, 500)
       } catch (e) {
         notFoundErrorHandler(e)
         throw new Error(e)

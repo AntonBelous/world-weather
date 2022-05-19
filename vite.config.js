@@ -8,14 +8,4 @@ export default defineConfig({
     vue(),
     eslintPlugin()
   ],
-  css: {
-    preprocessorOptions: {
-      scss: {
-        additionalData: `
-          @import "./src/scss/variables";
-          @import "./src/scss/mixins";
-        `
-      }
-    }
-  },
 })

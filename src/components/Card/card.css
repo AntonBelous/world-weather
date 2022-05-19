@@ -1,0 +1,115 @@
+.card {
+  @apply
+  flex
+  relative
+  flex-col
+  justify-start
+  grow
+  mx-auto
+  max-w-[824px]
+  overflow-hidden
+  p-6
+  rounded-[6px]
+  min-h-full
+  bg-white
+  shadow-card
+  xl:max-w-[600px]
+  xl:px-4
+  md:max-w-[400px]
+}
+
+.card--loading {
+  @apply
+  before:block
+  before:absolute
+  before:left-0
+  before:top-0
+  before:w-full
+  before:h-full
+  before:z-10
+}
+
+.card__head-row {
+  @apply
+  pb-10
+  xl:pb-7
+  md:pb-5
+}
+
+.card__title {
+  @apply
+  font-bold
+  text-card-title
+  xl:text-card-title-xl
+  md:text-card-title-md
+}
+
+.card__subtitle {
+  @apply
+  mt-4
+  xl:mt-3
+  lg:mt-1
+}
+
+.card__body-row {
+  @apply
+  mt-auto
+  pb-8
+  xl:pb-7
+  lg:pb-5
+  md:pb-4
+}
+
+.card__list-block {
+  @apply
+  flex
+  relative
+  pt-3.5
+  pb-3
+  border-b-[1px]
+  border-solid
+  border-divider
+  first:pt-0
+  lg:pt-4
+  lg:pb-2.5
+  md:pt-3
+  md:pb-2
+}
+
+.card__list-col {
+  @apply
+  first:mr-auto
+  first:pr-4
+  last:ml-auto
+  last:pl-4
+  last:text-right
+}
+
+.card__timer {
+  @apply
+  relative
+  text-right
+  pt-2
+  text-gray
+}
+
+.card__foot-row {
+  @apply
+  flex
+  relative
+}
+
+.card__btn {
+  @apply
+  p-0
+  border-none
+  bg-[transparent]
+  uppercase
+  text-purple
+  font-bold
+}
+
+.card__btn--reload {
+  @apply
+  ml-auto
+}

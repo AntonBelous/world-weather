@@ -1,13 +1,10 @@
+@import "_fonts.css";
+@import "_animation.css";
+@import "_base.css";
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-@import "animation";
-
-@layer base {
-  @import "fonts";
-  @import "base";
-}
 
 .main {
   @apply
@@ -102,36 +99,34 @@
   xl:pb-5
 }
 
-.main {
-  &__trigger {
-    display: flex;
-    position: fixed;
-    align-items: center;
-    justify-content: center;
-    width: 56px;
-    height: 56px;
-    right: 45px;
-    bottom: 34px;
-    background-color: $purple;
-    overflow: hidden;
-    border-radius: 50%;
-    box-shadow: 0 4px 5px rgba(0, 0, 0, .14), 0 1px 10px rgba(0, 0, 0, .12), 0 2px 4px rgba(0, 0, 0, .2);
-    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAcCAYAAAByDd+UAAAACXBIWXMAABYlAAAWJQFJUiTwAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAABCSURBVHgB7dWxDQAgCETRO0dx/5lcBVujFYlQ/d9RvYIErGQRsc7Z9lSioeYAAQEB6/N9G6tjh9+zkvEPAQEBAZ82mF0MEb/Woe8AAAAASUVORK5CYII=');
-    background-position: 50% 50%;
-    background-size: 14px 14px;
-    background-repeat: no-repeat;
-    transition: transform .4s;
+.main__trigger {
+  @apply
+  flex
+  fixed
+  items-center
+  justify-center
+  w-14
+  h-14
+  right-11
+  bottom-8
+  bg-purple
+  overflow-hidden
+  rounded-full
+  shadow-trigger
+  bg-center
+  duration-300
+  bg-no-repeat
+  z-20
+  bg-[length:14px_14px]
+  bg-[url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAcCAYAAAByDd+UAAAACXBIWXMAABYlAAAWJQFJUiTwAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAABCSURBVHgB7dWxDQAgCETRO0dx/5lcBVujFYlQ/d9RvYIErGQRsc7Z9lSioeYAAQEB6/N9G6tjh9+zkvEPAQEBAZ82mF0MEb/Woe8AAAAASUVORK5CYII=')]
+  lg:w-9
+  lg:h-9
+  lg:right-6
+  lg:bottom-6
+  bg-[length:12px_12px]
+}
 
-    @include lg {
-      width: 35px;
-      height: 35px;
-      right: 25px;
-      bottom: 25px;
-      background-size: 12px 12px;
-    }
-
-    &--hidden {
-      transform: scale(0);
-    }
-  }
+.main__trigger--hidden {
+  @apply
+  scale-0
 }
