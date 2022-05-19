@@ -1,0 +1,132 @@
+@import "_fonts.css";
+@import "_animation.css";
+@import "_base.css";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.main {
+  @apply
+  inline-flex
+  flex-col
+  grow
+  max-w-[1808px]
+  pt-6
+  md:pt-2.5
+  px-36
+  lg:px-24
+  md:px-4
+  pb-2
+  md:pb-[60px]
+  z-10
+}
+
+.main__title {
+  @apply
+  text-[70px]
+  leading-[80px]
+  font-light
+  mb-8
+  text-center
+  xl:text-[50px]
+  xl:leading-[55px]
+  xl:mb-5
+  lg:text-[36px]
+  lg:leading-[44px]
+  md:text-[28px]
+  md:leading-[36px]
+  md:mb-2.5
+}
+
+.main__subtitle {
+  @apply
+  text-subtitle
+  text-[24px]
+  leading-[24px]
+  text-center
+  mb-5
+  xl:text-[20px]
+  xl:mb-4
+  md:text-[18px]
+  md:leading-[22px]
+}
+
+.main__head-row {
+  @apply
+  flex
+  relative
+  justify-center
+  pb-[46px]
+  xl:pb-8
+  lg:pb-6
+}
+
+.main__body-row {
+  @apply
+  flex
+  relative
+  justify-center
+  flex-wrap
+  -mx-5
+  pb-1
+  xl:-mx-2
+  sm:pt-6
+  sm:after:block
+  sm:after:absolute
+  sm:after:top-0
+  sm:after:left-4
+  sm:after:h-px
+  sm:after:bg-divider
+  sm:after:w-[calc(100%-theme(space.8))]
+}
+
+.main__body-col {
+  @apply
+  grow
+  max-w-[25%]
+  min-w-[25%]
+  xl:max-w-[33.333%]
+  xl:min-w-[33.333%]
+  lg:max-w-[50%]
+  lg:min-w-[50%]
+  sm:max-w-[100%]
+  sm:min-w-[100%]
+  duration-300
+  px-5
+  pb-8
+  xl:px-3
+  xl:pb-5
+}
+
+.main__trigger {
+  @apply
+  flex
+  fixed
+  items-center
+  justify-center
+  w-14
+  h-14
+  right-11
+  bottom-8
+  bg-purple
+  overflow-hidden
+  rounded-full
+  shadow-trigger
+  bg-center
+  duration-300
+  bg-no-repeat
+  z-20
+  bg-[length:14px_14px]
+  bg-[url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAcCAYAAAByDd+UAAAACXBIWXMAABYlAAAWJQFJUiTwAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAABCSURBVHgB7dWxDQAgCETRO0dx/5lcBVujFYlQ/d9RvYIErGQRsc7Z9lSioeYAAQEB6/N9G6tjh9+zkvEPAQEBAZ82mF0MEb/Woe8AAAAASUVORK5CYII=')]
+  lg:w-9
+  lg:h-9
+  lg:right-6
+  lg:bottom-6
+  bg-[length:12px_12px]
+}
+
+.main__trigger--hidden {
+  @apply
+  scale-0
+}

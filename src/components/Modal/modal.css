@@ -1,0 +1,185 @@
+.modal {
+  @apply
+  flex
+  fixed
+  left-0
+  top-0
+  w-screen
+  h-screen
+  overflow-y-scroll
+  bg-modal-overlay
+  scrollbar-hide
+  z-20
+}
+
+.modal__container {
+  @apply
+  flex
+  absolute
+  items-center
+  justify-center
+  p-4
+  left-0
+  top-0
+  w-full
+  min-h-full
+}
+
+.modal__card {
+  @apply
+  relative
+  grow
+  max-w-[750px]
+  p-6
+  bg-white
+  rounded-[4px]
+  shadow-modal-shadow
+  z-0
+}
+
+.modal__card--loading {
+  @apply
+  before:block
+  before:absolute
+  before:left-0
+  before:top-0
+  before:w-full
+  before:h-full
+  before:bg-white
+  before:z-10
+}
+
+.modal__title {
+  @apply
+  font-bold
+  text-card-title
+  xl:text-card-title-xl
+  md:text-card-title-md
+}
+
+.modal__subtitle {
+  @apply
+  text-[24px]
+  leading-[24px]
+  mt-4
+  text-subtitle
+  xl:text-[20px]
+  xl:leading-[22px]
+  md:text-[18px]
+  md:leading-[20px]
+}
+
+.modal__search {
+  @apply
+  relative
+  mt-[51px]
+  mb-[116px]
+  md:mt-5
+}
+
+.modal__search-input {
+  @apply
+  block
+  border-[0_0_1px_0]
+  focus:outline-none
+  focus:outline-0
+}
+
+.modal__search-input {
+  @apply
+  border-body
+  py-4
+  font-medium
+  text-[24px]
+  leading-6
+  w-full
+  duration-300
+  placeholder-modal-shadow
+  focus:placeholder-[transparent]
+  md:text-[20px]
+  md:leading-5
+}
+
+.modal__search-error {
+  @apply
+  hidden
+  absolute
+  text-red
+  pt-3
+}
+
+.modal__search-results {
+  @apply
+  absolute
+  overflow-y-auto
+  max-h-[115px]
+  top-[70px]
+  border-solid
+  border-body
+  border-[1px]
+  w-full
+  scrollbar
+  scrollbar-thin
+  scrollbar-thumb-body
+  scrollbar-track-divider
+  xl:max-h-[104px]
+  lg:max-h-[98px]
+}
+
+.modal__search-item {
+  @apply
+  border-none
+  w-full
+  py-1
+  px-4
+  text-left
+  hover:bg-body
+  hover:text-white
+}
+
+.modal__foot-row {
+  @apply
+  flex
+  relative
+  justify-between
+  pt-6
+}
+
+.modal__foot-col {
+  @apply
+  first:pr-4
+  first:mr-auto
+  last:pl-4
+  last:ml-auto
+}
+
+.modal__btn {
+  @apply
+  p-0
+  border-none
+  text-modal-shadow
+  bg-[transparent]
+  uppercase
+  font-bold
+  ml-7
+  first:ml-0
+  hover:text-purple
+  disabled:cursor-not-allowed
+}
+
+.modal__spinner {
+  @apply
+  inline
+  absolute
+  origin-center
+  left-[50%]
+  top-[50%]
+  z-20
+  w-12
+  h-12
+  animate-spin
+  dark:text-transparent
+  fill-body
+  -ml-6
+  -mt-6
+}

@@ -1,0 +1,27 @@
+html {
+  @apply
+  scroll-smooth
+}
+
+body {
+  @apply
+  font-lato
+  select-none
+  scrollbar-hide
+  text-body
+  text-md
+  xl:text-sm
+  lg:text-xs
+}
+
+#app {
+  @apply
+  flex
+  relative
+  min-h-screen
+  justify-center
+}
+
+* {
+  -webkit-tap-highlight-color: transparent;
+}

@@ -1,8 +1,8 @@
 <template>
   <transition>
     <div
-      class="main"
       v-if="isAppReady"
+      class="main"
     >
       <h2 class="main__title">World Weather</h2>
 
@@ -11,8 +11,8 @@
           Watch weather in your current location
         </h4>
         <div class="main__head-row">
-          <card-component
-            :data="currentCity"
+          <CardComponent
+            :card-info="currentCity"
             :is-loading="isLoading"
             hide-remove-button
             @update-item="updateItem"
@@ -20,20 +20,20 @@
         </div>
       </template>
 
-      <h4 class="main__subtitle" v-else>
+      <h4 v-else class="main__subtitle">
         Please give this site access to your geolocation to see the weather in your city
       </h4>
 
       <transition>
-        <div class="main__body-row" ref="bodyRow" v-if="cities.length">
+        <div v-if="cities.length" ref="bodyRow" class="main__body-row">
           <transition-group>
             <div
-              class="main__body-col"
-              :key="index"
               v-for="(item, index) in cities"
+              :key="index"
+              class="main__body-col"
             >
-              <card-component
-                :data="item"
+              <CardComponent
+                :card-info="item"
                 :is-loading="isLoading"
                 @update-item="updateItem"
                 @remove-item="removeItem"
@@ -50,7 +50,7 @@
       ></button>
 
       <transition>
-        <modal-component
+        <ModalComponent
           :is-opened="isModalOpened"
           :is-loading="isModalLoading"
           @close-modal="isModalOpened = false"
@@ -64,11 +64,17 @@
 <script>
 import { ref, watch } from 'vue'
 import getWeatherData from './helpers/getWeatherData'
-import storage from '@/helpers/storageEmitter'
-import moment from 'moment'
+import storage from './helpers/storageEmitter'
+import CardComponent from "./components/Card/Card.vue";
+import ModalComponent from "./components/Modal/Modal.vue";
+import dayjs from 'dayjs'
+import relativeTime from 'dayjs/plugin/relativeTime'
+
+dayjs.extend(relativeTime)
 
 export default {
   name: 'App',
+  components: {ModalComponent, CardComponent},
   setup: function () {
     const cities = ref([])
     const isModalOpened = ref(false)
@@ -94,12 +100,15 @@ export default {
 
       try {
         const weather = await getWeatherData($event.name, $event.country)
-        weather.time = moment().format()
+        weather.time = dayjs().format()
         cities.value.push(weather)
         storage.set('cities', cities.value)
         isNewItemAdded.value = true
         isModalOpened.value = false
-        isModalLoading.value = false
+
+        setTimeout(() => {
+          isModalLoading.value = false
+        }, 500)
       } catch (e) {
         notFoundErrorHandler(e)
         throw new Error(e)
@@ -116,7 +125,7 @@ export default {
         const cityStorage = storage.get('currentCity')
         const formatData = { ...weather }
 
-        formatData.time = moment().format()
+        formatData.time = dayjs().format()
 
         if (cityStorage?.id !== formatData?.id) {
           const result = []
@@ -178,7 +187,7 @@ export default {
           const cityStorage = storage.get('currentCity')
           const formatData = { ...weather }
 
-          formatData.time = moment().format()
+          formatData.time = dayjs().format()
 
           if (cityStorage && cityStorage.id === formatData.id) {
             currentCity.value = cityStorage
