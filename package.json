@@ -7,7 +7,10 @@
     "build": "vite build",
     "preview": "vite preview",
     "lint": "eslint --ext .js,.vue --ignore-path .gitignore --fix src",
-    "format": "prettier .  --write"
+    "format": "prettier .  --write",
+    "start": "pm2 serve",
+    "heroku-prebuild": "npm install pm2 -g",
+    "heroku-postbuild": "npm run build"
   },
   "dependencies": {
     "axios": "^0.27.2",
